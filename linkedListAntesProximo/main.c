@@ -50,7 +50,7 @@ int mostrarItem(Node *node, int pos) {
 }
 
 int main() {
-    Node *ptr = NULL;
+    Node *head = NULL;
     bool programa = false;
     int valor;
     char resposta;
@@ -61,7 +61,7 @@ int main() {
 	case 'A':
 	  printf("\nQual valor voce deseja adicionar? ");
 	  scanf("%d", &valor);
-	  popularLista(&ptr, valor);
+	  popularLista(&head, valor);
 	  printf("\nValor adicionado!");
 	  break;
 	case 'R':
@@ -73,10 +73,10 @@ int main() {
 	case 'L':
 	  printf("\nQual posicao voce deseja listar? ");
 	  scanf("%d", &valor);
-	  if(ptr == NULL) {
+	  if(head == NULL) {
 	    printf("FODEU");
 	  }
-	  int resposta = mostrarItem(ptr, valor);
+	  int resposta = mostrarItem(head, valor);
 	  printf("\nChamou ");
 	  if (resposta == -1) {
 	    printf("\nPosicao invalida! Tente novamente");
@@ -86,9 +86,9 @@ int main() {
 	  break;
 	case 'T':
 	  printf("\nAqui estao todos os elementos alocados da lista: ");
-	  int tam = tamanhoLista(ptr);
+	  int tam = tamanhoLista(head);
 	  for (int i = 0; i < tam; i++) {
-	    printf("[%d, %d] -> ", i, mostrarItem(ptr, i));
+	    printf("[%d, %d] -> ", i, mostrarItem(head, i));
 	  }
 	  break;
 	case 'S':
