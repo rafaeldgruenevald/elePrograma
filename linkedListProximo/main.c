@@ -20,19 +20,35 @@ int tamanhoLista(Node *node) {
     return tam;
 }
 
-void adicionarNode(Node **node, int valor) {
+int adicionarNode(Node **node, int pos, int valor) {
+    int tam = tamanhoLista(*node);
+    Node *nodeAnterior = *node;
+    Node *nodePosterior = *node;
     Node *newNode = (Node*) malloc(sizeof(Node));
     newNode->valor = valor;
-    if (*node == NULL) {
-	newNode->proximo = NULL;
-	*node = newNode;
-    } else {
-	Node *tempNode = *node;
-	while (tempNode->proximo != NULL) {
-	    tempNode = tempNode->proximo;
-	}
-	tempNode->proximo = newNode;
+    if (pos > tam) {
+      return -1;
     }
+    if (pos == -1) {
+	if (*node == NULL) {
+	    newNode->proximo = NULL;
+	    *node = newNode;
+	} else {
+	    Node *tempNode = *node;
+	    while (tempNode->proximo != NULL) {
+		tempNode = tempNode->proximo;
+	    }
+	    tempNode->proximo = newNode;
+	}
+	return 1;
+    }
+    for (int i = 1; i < pos; i++) {
+      nodeAnterior = nodeAnterior->proximo;
+    }
+    nodePosterior = nodeAnterior->proximo;
+    nodeAnterior->proximo = newNode;
+    newNode->proximo = nodePosterior;
+    return 1;
 }
 
 int modificarNode(Node **node, int pos, int valor) {
@@ -98,9 +114,11 @@ int main() {
       scanf(" %c", &resposta);
       switch (resposta) {
 	case 'A':
+	  printf("\nQual posicao voce deseja adicionar este valor? (Colocar -1 caso final!)");
+	  scanf("%d", &pos);
 	  printf("\nQual valor voce deseja adicionar? ");
 	  scanf("%d", &valor);
-	  adicionarNode(&head, valor);
+	  adicionarNode(&head, pos, valor);
 	  printf("\nValor adicionado!");
 	  break;
 	case 'R':
