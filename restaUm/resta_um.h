@@ -126,8 +126,10 @@ status_t movimenta(char tab[][7], movimento_t* jog) {
 
     diffLin = *(&jog->origem.lin) - *(&jog->destino.lin);
     diffCol = *(&jog->origem.col) - *(&jog->destino.col);
-    sitOrigem = *(tab + *(&jog->origem.lin) * NLIN + *(&jog->origem.col));
-    sitDestino = *(tab + *(&jog->destino.lin) * NLIN + *(&jog->destino.col));
+    //sitOrigem = *(tab + *(&jog->origem.lin) * NLIN + *(&jog->origem.col));
+    sitOrigem = tab[jog->origem.lin][jog->origem.col];
+    //sitDestino = *(tab + *(&jog->destino.lin) * NLIN + *(&jog->destino.col));
+    sitDestino = tab[jog->destino.lin][jog->destino.col];
     printf("%c %c\n", sitOrigem, sitDestino);
 
     /*
