@@ -132,7 +132,7 @@ status_t movimenta(char tab[][7], movimento_t* jog) {
     sitDestino = tab[jog->destino.lin][jog->destino.col];
     printf("%c %c\n", sitOrigem, sitDestino);
 
-    /*
+    
     if(jog->origem.lin > 6 || jog->destino.lin > 6 || jog->origem.col > 6 || jog->destino.col > 6){
         return INVALIDO;
     }
@@ -145,35 +145,35 @@ status_t movimenta(char tab[][7], movimento_t* jog) {
     if(sitDestino == VZ && sitOrigem == OC){
         if(*(&jog->origem.lin) == *(&jog->destino.lin)){
             if(*(&jog->origem.col) > *(&jog->destino.col)){
-                if(*(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) != VZ && *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) != NU){
-                    *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) = VZ;
+                if(tab[jog->origem.lin][jog->origem.col - 1] != VZ && tab[jog->origem.lin][jog->origem.col - 1] != NU){
+                    tab[jog->origem.lin][jog->origem.col - 1] = VZ;
                 }else{
                     return INVALIDO;
                 }
             }else{
-                if(*(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) != VZ && *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) != NU){
-                    *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) = VZ;
+                if(tab[jog->origem.lin][jog->origem.col + 1] != VZ && tab[jog->origem.lin][jog->origem.col + 1] != NU){
+                    tab[jog->origem.lin][jog->origem.col + 1] = VZ;
                 }else{
                     return INVALIDO;
                 }
             }
         }else{
         if(*(&jog->origem.lin) > *(&jog->destino.lin)){
-            if(*(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) != VZ && *(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) != NU){
-                *(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) = VZ;
+            if(tab[jog->origem.lin - 1][jog->origem.col] != VZ && tab[jog->origem.lin - 1][jog->origem.col]){
+                tab[jog->origem.lin - 1][jog->origem.col] = VZ;
             }else{
                 return INVALIDO;
             }
         }else{
-            if(*(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) != VZ && *(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) != NU){
-                *(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) = VZ;
+            if(tab[jog->origem.lin + 1][jog->origem.col] != VZ && tab[jog->origem.lin + 1][jog->origem.col] != NU){
+                tab[jog->origem.lin + 1][jog->origem.col] = VZ;
             }else{
                 return INVALIDO;
             }
         }
     }
-    *(tab + *(&jog->origem.lin) * NLIN + *(&jog->origem.col)) = VZ;
-    *(tab + *(&jog->destino.lin) * NLIN + *(&jog->destino.col)) = OC;
+    tab[jog->origem.lin][jog->origem.col] = VZ;
+    tab[jog->destino.lin][jog->destino.col] = OC;
     return OK;
 }else if(sitOrigem == VZ){
     return VAZIO;
@@ -182,7 +182,7 @@ status_t movimenta(char tab[][7], movimento_t* jog) {
 }else{
     return INVALIDO;
 }
-*/
+
 return OK;
 }
 
