@@ -104,7 +104,7 @@ status_t qualJogada(movimento_t* jog) {
         printf("\nLinha de Destino:");
         scanf("%i", &(jog->destino.lin));
 
-        printf("Coluna de Origem: %i, Linha de Origem: %i, Coluna de Destino: %i, Linha de Destino: %i", jog->origem.col, jog->origem.lin, jog->destino.col, jog->destino.lin);
+        printf("Coluna de Origem: %i, Linha de Origem: %i, Coluna de Destino: %i, Linha de Destino: %i\n", jog->origem.col, jog->origem.lin, jog->destino.col, jog->destino.lin);
         return OK;
     } else {
         return DERROTA;
@@ -120,7 +120,69 @@ status_t qualJogada(movimento_t* jog) {
           OCUPADO - posicao destino ocupada
           VAZIO - posicao origem vazia
 */
-status_t movimenta(char tab[][7], movimento_t* jog) {}
+status_t movimenta(char tab[][7], movimento_t* jog) {
+    int diffLin, diffCol;
+    char sitOrigem, sitDestino;
+
+    diffLin = *(&jog->origem.lin) - *(&jog->destino.lin);
+    diffCol = *(&jog->origem.col) - *(&jog->destino.col);
+    sitOrigem = *(tab + *(&jog->origem.lin) * NLIN + *(&jog->origem.col));
+    sitDestino = *(tab + *(&jog->destino.lin) * NLIN + *(&jog->destino.col));
+    printf("%c %c\n", sitOrigem, sitDestino);
+
+    /*
+    if(jog->origem.lin > 6 || jog->destino.lin > 6 || jog->origem.col > 6 || jog->destino.col > 6){
+        return INVALIDO;
+    }
+    else if((jog->origem.lin != jog->destino.lin) && (jog->origem.col != jog->destino.col)){
+        return INVALIDO;
+    }else if((diffLin != -2 && diffLin != 2) && (diffCol != -2 && diffCol != 2)){
+        return INVALIDO;
+    }
+
+    if(sitDestino == VZ && sitOrigem == OC){
+        if(*(&jog->origem.lin) == *(&jog->destino.lin)){
+            if(*(&jog->origem.col) > *(&jog->destino.col)){
+                if(*(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) != VZ && *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) != NU){
+                    *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) - 1)) = VZ;
+                }else{
+                    return INVALIDO;
+                }
+            }else{
+                if(*(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) != VZ && *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) != NU){
+                    *(tab + *(&jog->origem.lin) * NLIN + (*(&jog->origem.col) + 1)) = VZ;
+                }else{
+                    return INVALIDO;
+                }
+            }
+        }else{
+        if(*(&jog->origem.lin) > *(&jog->destino.lin)){
+            if(*(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) != VZ && *(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) != NU){
+                *(tab + *((&jog->origem.lin) - 1) * NLIN + *(&jog->origem.col)) = VZ;
+            }else{
+                return INVALIDO;
+            }
+        }else{
+            if(*(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) != VZ && *(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) != NU){
+                *(tab + *((&jog->origem.lin) + 1) * NLIN + *(&jog->origem.col)) = VZ;
+            }else{
+                return INVALIDO;
+            }
+        }
+    }
+    *(tab + *(&jog->origem.lin) * NLIN + *(&jog->origem.col)) = VZ;
+    *(tab + *(&jog->destino.lin) * NLIN + *(&jog->destino.col)) = OC;
+    return OK;
+}else if(sitOrigem == VZ){
+    return VAZIO;
+}else if(sitDestino == OC){
+    return OCUPADO;
+}else{
+    return INVALIDO;
+}
+*/
+return OK;
+}
 
 /*
 * @brief  Confere possibilidades de continuacao
@@ -129,6 +191,8 @@ status_t movimenta(char tab[][7], movimento_t* jog) {}
           VITORIA - restou um, acabou
           DERROTA - nada mais a fazer, fim de jogo
 */
-status_t confereJogo(char tab[][7]) {}
+status_t confereJogo(char tab[][7]) {
+     
+}
 
 #endif //_RESTA_UM_H_
