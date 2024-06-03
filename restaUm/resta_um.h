@@ -194,7 +194,28 @@ return OK;
           DERROTA - nada mais a fazer, fim de jogo
 */
 status_t confereJogo(char tab[][7]) {
-     
+    int pecas = 0;
+    int movimentosPossiveis = 0;
+
+    for (int i = 0; i < NLIN; i++) {
+        for (int j = 0; j < NCOL; j++) {
+            if (tab[i][j] == OC) {
+                pecas++;
+                if (i > 1 && tab[i-1][j] == OC && tab[i-2][j] == VZ) movimentosPossiveis++;
+                if (i < NLIN-2 && tab[i+1][j] == OC && tab[i+2][j] == VZ) movimentosPossiveis++;
+                if (j > 1 && tab[i][j-1] == OC && tab[i][j-2] == VZ) movimentosPossiveis++;
+                if (j < NCOL-2 && tab[i][j+1] == OC && tab[i][j+2] == VZ) movimentosPossiveis++;
+            }
+        }
+    }
+
+    if (pecas == 1) {
+        return VITORIA;
+    } else if (movimentosPossiveis == 0) {
+        return DERROTA;
+    } else {
+        return OK;
+    }
 }
 
 #endif //_RESTA_UM_H_
