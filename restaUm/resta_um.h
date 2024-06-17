@@ -49,7 +49,6 @@ typedef enum
  * @param  tabuleiro
  * @retval none
  */
-
 void inicTab(char *tab);
 
 /*

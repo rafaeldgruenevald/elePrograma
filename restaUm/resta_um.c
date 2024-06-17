@@ -24,6 +24,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+#include <ctype.h>
 #include "resta_um.h"
 
 #define MAXMSG 100 // tamanho maximo mensagens
@@ -85,9 +86,44 @@ int main()
 
 } // fim main
 
+void inicTab(char *tab)
+{
+    for (int i = 0; i < NLIN; i++)
+    {
+        for (int j = 0; j < NCOL; j++)
+        {
+            *(tab + i * NCOL + j) = OC;
+            if (i == 0 || i == 1 || i == 5 || i == 6)
+            {
+                if (j == 0 || j == 1 || j == 5 || j == 6)
+                {
+                    *(tab + i * NCOL + j) = NU;
+                }
+            }
+        }
+    }
+    *(tab + 3 * NCOL + 3) = VZ;
+}
+
+void showTab(char *tab)
+{
+    printf("  A B C D E F G");
+    printf("\n");
+    for (int i = 0; i < NLIN; i++)
+    {
+        printf("%i ", i + 1);
+        for (int j = 0; j < NCOL; j++)
+        {
+            printf("%c ", *(tab + i * NCOL + j));
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
 status_t qualJogada(movimento_t *jog)
 {
-    char input;
+    char input, oriCol, destCol;
     while (input != 's' && input != 'S' && input != 'n' && input != 'N')
     {
         printf("\nDeseja continuar jogando? (S)im ou (N)ao");
@@ -97,17 +133,19 @@ status_t qualJogada(movimento_t *jog)
     {
         printf("\nInsira as coordenadas da peça que você deseja mover:");
         printf("\nColuna de Origem:");
-        scanf("%i", &(jog->origem.col));
+        scanf(" %c", &oriCol);
+        jog->origem.col = toupper(oriCol) - 'A';
         printf("\nLinha de Origem:");
         scanf("%i", &(jog->origem.lin));
+        jog->origem.lin -= 1;
 
         printf("\nInsira as coordenadas para onde você quer ir:");
         printf("\nColuna de Destino:");
-        scanf("%i", &(jog->destino.col));
+        scanf(" %c", &destCol);
+        jog->destino.col = toupper(destCol) - 'A';
         printf("\nLinha de Destino:");
         scanf("%i", &(jog->destino.lin));
-
-        printf("Coluna de Origem: %i, Linha de Origem: %i, Coluna de Destino: %i, Linha de Destino: %i\n", jog->origem.col, jog->origem.lin, jog->destino.col, jog->destino.lin);
+        jog->destino.lin -= 1;
         return OK;
     }
     else
